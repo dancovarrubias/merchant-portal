@@ -29,3 +29,91 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Markdown content styles for chat messages */
+.markdown-content {
+  line-height: 1.6;
+}
+
+/* Ensure proper list styling in markdown */
+.markdown-content ul li {
+  position: relative;
+  padding-left: 0.5rem;
+}
+
+.markdown-content ol li {
+  position: relative;
+  padding-left: 0.5rem;
+}
+
+/* Better numbered list formatting */
+.markdown-content ol {
+  counter-reset: list-counter;
+}
+
+.markdown-content ol li {
+  counter-increment: list-counter;
+  position: relative;
+}
+
+.markdown-content ol li::marker {
+  font-weight: 600;
+  color: #4b5563;
+}
+
+/* Improve list item spacing */
+.markdown-content li p {
+  margin-bottom: 0.25rem;
+}
+
+.markdown-content li:last-child p {
+  margin-bottom: 0;
+}
+
+/* Highlight important text */
+.markdown-content strong {
+  color: #111827;
+  font-weight: 600;
+}
+
+/* Code block styling */
+.markdown-content pre {
+  margin: 0;
+}
+
+.markdown-content pre code {
+  display: block;
+  overflow-x: auto;
+  padding: 1rem;
+  background: #f3f4f6;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Inline code styling */
+.markdown-content :not(pre) > code {
+  background: #f3f4f6;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+/* Table styling */
+.markdown-content table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.markdown-content th,
+.markdown-content td {
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem;
+}
+
+.markdown-content th {
+  background: #f9fafb;
+  font-weight: 600;
+}

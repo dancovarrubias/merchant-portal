@@ -19,7 +19,6 @@ const StoreQRModal = ({ isOpen, onClose }) => {
       isOpen={isOpen}
       onClose={onClose}
       title=" "
-      size="default"
       showCloseButton={true}
       showBackButton={false}
     >

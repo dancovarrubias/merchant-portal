@@ -14,9 +14,12 @@ const VirtualAssistant = () => {
     isModalOpen,
     hasNewMessage,
     previewMessage,
+    isInitializing,
+    error,
     sendMessage,
     openChat,
-    closeChat
+    closeChat,
+    retryInitialization
   } = useChat();
 
   return (
@@ -33,6 +36,9 @@ const VirtualAssistant = () => {
         messages={messages}
         onSendMessage={sendMessage}
         isTyping={isTyping}
+        isInitializing={isInitializing}
+        error={error}
+        onRetry={retryInitialization}
       />
     </>
   );

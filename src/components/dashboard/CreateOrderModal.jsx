@@ -358,7 +358,6 @@ const CreateOrderModal = ({ isOpen, onClose }) => {
       showBackButton={step === MODAL_STEPS.PAYMENT || step === MODAL_STEPS.CONFIRM}
       showCloseButton={step !== MODAL_STEPS.CONFIRM && step !== MODAL_STEPS.WAITING && step !== MODAL_STEPS.SUCCESS}
       title={getModalTitle()}
-      size="default"
     >
       {step === MODAL_STEPS.FORM && renderFormStep()}
       {step === MODAL_STEPS.PAYMENT && renderPaymentStep()}

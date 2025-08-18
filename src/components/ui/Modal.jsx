@@ -6,7 +6,6 @@ const Modal = ({
   onBack,
   title, 
   children,
-  size = 'default', // default, small, large
   variant = 'default', // default, chat
   showBackButton = false,
   showCloseButton = true
@@ -25,12 +24,6 @@ const Modal = ({
 
   if (!isOpen) return null;
 
-  const sizeClasses = {
-    small: 'max-w-sm',
-    default: '',
-    large: 'max-w-7xl'
-  };
-
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Backdrop */}
@@ -39,11 +32,12 @@ const Modal = ({
         onClick={onClose}
       />
       
-      {/* Modal */}
-      <div className="flex min-h-full items-center justify-center p-0 sm:p-3">
-        <div className={`relative bg-white sm:rounded-2xl shadow-xl w-full h-full min-h-screen sm:min-h-[calc(100vh-24px)] flex flex-col ${sizeClasses[size]} transform transition-all`}>
-          {/* Header with buttons */}
-          <div className="absolute top-0 left-0 right-0 flex items-center justify-between p-4 sm:p-6 z-10">
+      {/* Modal Container - Same for all modals */}
+      <div className="flex min-h-full items-center justify-center p-0 sm:p-4">
+        {/* Modal - Full screen on mobile, with margins on desktop for ALL modals */}
+        <div className="relative bg-white rounded-none sm:rounded-2xl shadow-xl w-full sm:w-[calc(100vw-2rem)] h-screen sm:h-[calc(100vh-2rem)] flex flex-col transform transition-all">
+          {/* Header - Sticky for chat, absolute for others */}
+          <div className={`${variant === 'chat' ? 'sticky' : 'absolute'} top-0 left-0 right-0 flex items-center justify-between p-4 sm:p-6 z-10 ${variant === 'chat' ? 'bg-white border-b border-gray-100' : ''} rounded-t-none sm:rounded-t-2xl`}>
             {/* Back Button */}
             {showBackButton && (
               <button
@@ -82,14 +76,12 @@ const Modal = ({
           
           {/* Content */}
           {variant === 'chat' ? (
-            // Chat variant: full height layout
-            <div className="flex-1 flex flex-col pt-20 pb-6 px-4 sm:px-8 min-h-0">
-              <div className="max-w-lg w-full mx-auto flex-1 flex flex-col min-h-0">
-                {children}
-              </div>
+            // Chat variant: full height layout with scrollable content
+            <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
+              {children}
             </div>
           ) : (
-            // Default variant: centered content
+            // Default variant: centered content with padding for absolute header
             <div className="flex-1 flex items-center justify-center px-4 sm:px-8 py-20 sm:py-24">
               <div className="max-w-lg w-full">
                 {children}
