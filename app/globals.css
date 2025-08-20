@@ -192,3 +192,36 @@ code {
   background: #f9fafb;
   font-weight: 600;
 }
+
+/* Resizable modal styles */
+[data-resize-handle] {
+  transition: background-color 0.2s;
+}
+
+[data-resize-handle]:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+[data-resize-handle="n"]:hover,
+[data-resize-handle="s"]:hover {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+[data-resize-handle="e"]:hover,
+[data-resize-handle="w"]:hover {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+/* Prevent text selection during resize/drag */
+.resizing-active {
+  user-select: none;
+}
+
+/* Chat modal specific styles when resizable */
+[data-modal-header="true"] {
+  user-select: none;
+}
+
+[data-modal-header="true"] button {
+  cursor: pointer !important;
+}

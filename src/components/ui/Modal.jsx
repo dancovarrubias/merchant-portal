@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import ResizableWrapper from './ResizableWrapper';
 
 const Modal = ({ 
   isOpen, 
@@ -8,7 +9,9 @@ const Modal = ({
   children,
   variant = 'default', // default, chat
   showBackButton = false,
-  showCloseButton = true
+  showCloseButton = true,
+  resizable = false,
+  resizableOptions = {}
 }) => {
   useEffect(() => {
     if (isOpen) {
@@ -24,20 +27,17 @@ const Modal = ({
 
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      {/* Backdrop */}
-      <div 
-        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
-        onClick={onClose}
-      />
-      
-      {/* Modal Container - Same for all modals */}
-      <div className="flex min-h-full items-center justify-center p-0 sm:p-4">
-        {/* Modal - Full screen on mobile, with margins on desktop for ALL modals */}
-        <div className="relative bg-white rounded-none sm:rounded-2xl shadow-xl w-full sm:w-[calc(100vw-2rem)] h-screen sm:h-[calc(100vh-2rem)] flex flex-col transform transition-all">
+  // Check if it's a resizable chat modal
+  const isResizableChat = variant === 'chat' && resizable;
+
+  // Modal content component
+  const modalContent = (
+    <div className={`${isResizableChat ? 'w-full h-full' : 'relative'} bg-white rounded-none sm:rounded-2xl ${isResizableChat ? 'overflow-hidden' : ''} shadow-xl ${!isResizableChat ? 'w-full sm:w-[calc(100vw-2rem)] h-screen sm:h-[calc(100vh-2rem)]' : ''} flex flex-col transform transition-all`}>
           {/* Header - Sticky for chat, absolute for others */}
-          <div className={`${variant === 'chat' ? 'sticky' : 'absolute'} top-0 left-0 right-0 flex items-center justify-between p-4 sm:p-6 z-10 ${variant === 'chat' ? 'bg-white border-b border-gray-100' : ''} rounded-t-none sm:rounded-t-2xl`}>
+          <div 
+            className={`${variant === 'chat' ? 'sticky' : 'absolute'} top-0 left-0 right-0 flex items-center justify-between p-4 sm:p-6 z-10 ${variant === 'chat' ? 'bg-white border-b border-gray-100' : ''} rounded-t-none sm:rounded-t-2xl ${isResizableChat ? 'cursor-move' : ''}`}
+            data-modal-header={isResizableChat ? 'true' : undefined}
+          >
             {/* Back Button */}
             {showBackButton && (
               <button
@@ -88,7 +88,36 @@ const Modal = ({
               </div>
             </div>
           )}
-        </div>
+    </div>
+  );
+
+  // For resizable chat modal - no backdrop, wrapped in ResizableWrapper
+  if (isResizableChat) {
+    return (
+      <div className="fixed inset-0 z-50 pointer-events-none">
+        <ResizableWrapper
+          enabled={resizable}
+          className="pointer-events-auto"
+          {...resizableOptions}
+        >
+          {modalContent}
+        </ResizableWrapper>
+      </div>
+    );
+  }
+
+  // For regular modals - with backdrop, centered
+  return (
+    <div className="fixed inset-0 z-50 overflow-y-auto">
+      {/* Backdrop */}
+      <div 
+        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+        onClick={onClose}
+      />
+      
+      {/* Modal Container */}
+      <div className="flex min-h-full items-center justify-center p-0 sm:p-4">
+        {modalContent}
       </div>
     </div>
   );

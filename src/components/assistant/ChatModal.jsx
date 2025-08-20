@@ -8,6 +8,19 @@ const ChatModal = ({ isOpen, onClose, messages, onSendMessage, isTyping, isIniti
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  
+  // Check if we're on mobile
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -56,6 +69,17 @@ const ChatModal = ({ isOpen, onClose, messages, onSendMessage, isTyping, isIniti
       title={CHAT_CONFIG.MODAL_TITLE}
       variant="chat"
       showCloseButton={true}
+      resizable={!isMobile}
+      resizableOptions={{
+        initialWidth: 700,
+        initialHeight: 600,
+        minWidth: 400,
+        minHeight: 400,
+        maxWidthPercent: 90,
+        maxHeightPercent: 90,
+        persistKey: 'chatModalDimensions',
+        centered: true
+      }}
     >
       {/* Main container - must expand to fill parent */}
       <div className="flex flex-col flex-1 min-h-0 relative">
