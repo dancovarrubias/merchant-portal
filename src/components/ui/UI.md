@@ -18,6 +18,8 @@ Flexible modal dialog component.
 - **Animations**: Smooth fade-in/out
 - **Accessibility**: Focus trap, ESC key support
 - **Sizes**: sm, md, lg, xl, full
+- **Resizable Support**: Optional resizable prop for chat variant
+- **No Overlay Option**: Chat variant can work without backdrop
 
 ### Table.jsx
 Data table with sorting and pagination.
@@ -205,6 +207,15 @@ All components follow WCAG 2.1 guidelines:
 - Screen reader support
 - Color contrast compliance
 
+### ResizableWrapper.jsx
+HOC component that makes any element resizable and draggable.
+- **8-Point Resize**: Resize from corners and edges
+- **Drag Support**: Move elements by dragging
+- **Visual Feedback**: Hover states and resize indicators
+- **Boundaries**: Min/max size constraints
+- **Persistence**: Optional localStorage support
+- **Performance**: Uses requestAnimationFrame for smooth resizing
+
 ## Performance
 
 Components are optimized for performance:
@@ -212,3 +223,4 @@ Components are optimized for performance:
 - Lazy loading for heavy components
 - CSS-in-JS avoided for better performance
 - Minimal re-renders through proper state management
+- RequestAnimationFrame for smooth animations (ResizableWrapper)

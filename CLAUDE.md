@@ -54,6 +54,7 @@ The codebase uses a modular architecture with clear separation of concerns:
   - `useSemanticSearch`: Advanced semantic search with phonetic matching
   - `useChat`: Chat functionality for AI assistant
   - `useDebounce`: Debouncing utility
+  - `useResizable`: Makes elements resizable and draggable
 
 - **`src/lib/openai/`**: OpenAI integration
   - Assistant service, response cleaner, and configuration
@@ -64,10 +65,12 @@ The codebase uses a modular architecture with clear separation of concerns:
 
 2. **Virtual Assistant (Kike)**: 
    - Fully integrated with OpenAI Assistant API
-   - Draggable floating chat interface
+   - Resizable and draggable chat window (desktop)
+   - No overlay - allows multitasking with background content
    - Markdown formatting with bullets, lists, and rich text
    - Conversation persistence via localStorage
-   - Auto-clears on logout
+   - Position/size persistence for chat window
+   - Auto-clears conversation on logout
 
 3. **Authentication**: Session-based auth using cookies (middleware.js handles route protection)
 

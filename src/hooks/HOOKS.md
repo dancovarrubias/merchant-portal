@@ -5,6 +5,75 @@ Custom hooks that encapsulate reusable logic for the Kueski Pay POS system.
 
 ## Available Hooks
 
+### useResizable
+Custom hook for making elements resizable and draggable with full control over dimensions and position.
+
+#### Features
+- **8-Point Resize System**: Resize from any edge or corner
+- **Drag to Move**: Reposition elements by dragging
+- **Boundary Constraints**: Min/max size limits
+- **Viewport Awareness**: Keeps elements within screen bounds
+- **LocalStorage Persistence**: Optional save/restore of position
+- **Performance Optimized**: Uses requestAnimationFrame
+- **Touch Support**: Works on touch devices
+
+#### Usage
+```javascript
+import useResizable from '@/hooks/useResizable';
+
+const MyComponent = () => {
+  const {
+    dimensions,      // { width, height, x, y }
+    isResizing,      // Boolean - true during resize
+    isDragging,      // Boolean - true during drag
+    activeHandle,    // String - which handle is being used
+    handlers         // { onResizeStart, onDragStart }
+  } = useResizable({
+    initialWidth: 600,
+    initialHeight: 400,
+    minWidth: 300,
+    minHeight: 200,
+    maxWidthPercent: 90,
+    maxHeightPercent: 90,
+    persistKey: 'myComponentSize',
+    enabled: true,
+    centered: true
+  });
+  
+  return (
+    <div style={{
+      width: dimensions.width,
+      height: dimensions.height,
+      transform: `translate(${dimensions.x}px, ${dimensions.y}px)`
+    }}>
+      {/* Your content */}
+    </div>
+  );
+};
+```
+
+#### Options
+```javascript
+{
+  initialWidth: 600,        // Initial width in pixels
+  initialHeight: 500,       // Initial height in pixels
+  minWidth: 400,           // Minimum width
+  minHeight: 300,          // Minimum height
+  maxWidthPercent: 90,     // Max width as % of viewport
+  maxHeightPercent: 90,    // Max height as % of viewport
+  persistKey: null,        // localStorage key for persistence
+  enabled: true,           // Enable/disable functionality
+  centered: true           // Start centered in viewport
+}
+```
+
+#### Implementation Details
+- **Resize Handles**: 'n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'
+- **Cursor Management**: Appropriate cursors for each direction
+- **Event Handling**: Mouse and touch events supported
+- **Cleanup**: Proper event listener cleanup on unmount
+- **Window Resize**: Adjusts boundaries on viewport change
+
 ### useSemanticSearch
 Advanced search hook with phonetic matching, fuzzy search, and semantic mapping for Spanish language.
 

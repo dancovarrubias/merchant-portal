@@ -26,6 +26,13 @@ Main chat interface using Modal component with 'chat' variant.
 - **Typing Indicator**: Animated dots
 - **Auto-scroll**: Scrolls to latest message
 - **Keyboard Support**: Enter to send, Escape to close
+- **Resizable Window** (Desktop only):
+  - Resize from 8 points (4 sides + 4 corners)
+  - Drag to move from header
+  - No overlay - background visible for multitasking
+  - Size persists in localStorage
+  - Min size: 400x400px, Max: 90% viewport
+  - Uniform shadow with rounded corners
 
 ### ChatMessage.jsx
 Message bubble component.
@@ -116,3 +123,37 @@ import VirtualAssistant from '@/components/assistant';
 
 <VirtualAssistant />
 ```
+
+## Resizable Modal Feature
+
+### How It Works
+The chat modal can be resized and repositioned on desktop devices for better multitasking:
+
+1. **Resize**: Hover over any edge or corner to see resize cursor, then drag
+2. **Move**: Click and drag the header to reposition the modal
+3. **No Overlay**: Background remains interactive while chatting
+4. **Persistence**: Size and position saved in localStorage
+
+### Configuration
+```jsx
+// In ChatModal.jsx
+resizable={!isMobile}
+resizableOptions={{
+  initialWidth: 700,
+  initialHeight: 600,
+  minWidth: 400,
+  minHeight: 400,
+  maxWidthPercent: 90,
+  maxHeightPercent: 90,
+  persistKey: 'chatModalDimensions',
+  centered: true
+}}
+```
+
+### Visual Design
+- **Border Radius**: rounded-2xl (1rem)
+- **Shadow**: Dual-layer uniform shadow
+  - Primary: `0 0 30px rgba(0, 0, 0, 0.12)`
+  - Secondary: `0 0 60px rgba(0, 0, 0, 0.08)`
+- **Resize Handles**: 8 interactive zones with hover feedback
+- **Visual Feedback**: Blue border during resize
