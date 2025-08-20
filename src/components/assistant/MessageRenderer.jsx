@@ -35,18 +35,30 @@ const MessageRenderer = ({ content, isUser }) => {
         
         // Lists
         ul: ({ children }) => (
-          <ul className="list-disc list-inside mb-3 space-y-1.5 ml-2">{children}</ul>
+          <ul className="mb-3 space-y-1.5 ml-1">{children}</ul>
         ),
         ol: ({ children, start }) => (
-          <ol className="list-decimal list-inside mb-3 space-y-1.5 ml-2" start={start}>
+          <ol className="mb-3 space-y-1.5 ml-1 list-decimal list-inside" start={start}>
             {children}
           </ol>
         ),
-        li: ({ children, ordered }) => (
-          <li className="ml-2">
-            <span className="inline-block align-top">{children}</span>
-          </li>
-        ),
+        li: ({ children, ordered }) => {
+          // For unordered lists, use custom bullet
+          if (!ordered) {
+            return (
+              <li className="flex items-start">
+                <span className="text-blue-500 mr-2 mt-0.5 flex-shrink-0">•</span>
+                <span className="flex-1">{children}</span>
+              </li>
+            );
+          }
+          // For ordered lists, use default numbering
+          return (
+            <li className="ml-2">
+              <span className="inline-block align-top">{children}</span>
+            </li>
+          );
+        },
         
         // Strong/Bold
         strong: ({ children }) => (

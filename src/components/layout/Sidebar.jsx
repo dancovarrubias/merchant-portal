@@ -175,7 +175,11 @@ const Sidebar = ({ isOpen, onClose }) => {
           <div className="mt-auto pt-6 pb-2 border-t border-border-light">
             <button
               onClick={() => {
+                // Limpiar sesión
                 document.cookie = 'session=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+                // Limpiar el historial del chat
+                localStorage.removeItem('chatThreadId');
+                // Redirigir al login
                 window.location.href = '/';
               }}
               className="flex items-center gap-3 px-4 py-3 w-full rounded-lg font-inter font-medium text-sm text-text-primary hover:bg-gray-50 transition-all"

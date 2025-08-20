@@ -58,12 +58,18 @@ class ResponseCleaner {
 
     // Clean up extra spaces and line breaks
     if (trimExtraSpaces) {
-      // Replace multiple spaces with single space
-      cleanedText = cleanedText.replace(/\s+/g, ' ');
+      // Only replace multiple spaces (not newlines) with single space
+      cleanedText = cleanedText.replace(/[^\S\n]+/g, ' ');
       
-      // Replace multiple line breaks with double line break
+      // Preserve line breaks but clean up excessive ones
       if (preserveFormatting) {
+        // Replace 3+ line breaks with double line break
         cleanedText = cleanedText.replace(/\n{3,}/g, '\n\n');
+        // Remove spaces at the beginning and end of lines
+        cleanedText = cleanedText.replace(/^[ \t]+|[ \t]+$/gm, '');
+      } else {
+        // If not preserving formatting, replace all line breaks with spaces
+        cleanedText = cleanedText.replace(/\s+/g, ' ');
       }
       
       // Trim leading and trailing whitespace
@@ -146,22 +152,67 @@ class ResponseCleaner {
    * @returns {string} - Formatted text
    */
   formatMarkdown(text) {
-    // Fix bold markers
+    // Don't double-space line breaks, markdown already handles this
+    // text = text.replace(/\n/g, '  \n'); // REMOVED - this was breaking formatting
+    
+    // Fix bold markers - ensure proper spacing
     text = text.replace(/\*\*\s+/g, '**');
     text = text.replace(/\s+\*\*/g, '**');
     
-    // Fix italic markers
-    text = text.replace(/\*\s+/g, '*');
-    text = text.replace(/\s+\*/g, '*');
+    // Fix italic markers (but preserve bold markers **)
+    text = text.replace(/(?<!\*)\*(?!\*)\s+/g, '*');
+    text = text.replace(/\s+(?<!\*)\*(?!\*)/g, '*');
     
     // Fix heading spacing
     text = text.replace(/^#+\s*$/gm, '');
     text = text.replace(/^(#+)\s+/gm, '$1 ');
     
-    // Fix list formatting
-    text = text.replace(/^-\s+/gm, '- ');
-    text = text.replace(/^\*\s+/gm, '* ');
-    text = text.replace(/^\d+\.\s+/gm, (match) => match);
+    // Convert dash/asterisk lists to bullet points
+    text = text.replace(/^[\-\*]\s+/gm, '• ');
+    
+    // Ensure numbered lists are properly formatted
+    text = text.replace(/^(\d+)\.\s*/gm, '$1. ');
+    
+    // Clean up excessive line breaks (but preserve intentional spacing)
+    text = text.replace(/\n{4,}/g, '\n\n');
+    
+    return text;
+  }
+  
+  /**
+   * Enhanced markdown formatter for chat responses
+   * @param {string} text - Text to format for chat
+   * @returns {string} - Formatted text optimized for chat display
+   */
+  formatForChat(text) {
+    // Don't apply formatMarkdown first as it might break things
+    // Just do targeted fixes for chat display
+    
+    // Ensure bullet points use • instead of - or *
+    text = text.replace(/^[\-\*]\s+/gm, '• ');
+    
+    // Ensure numbered lists are properly formatted
+    text = text.replace(/^(\d+)\.\s*/gm, '$1. ');
+    
+    // Fix bold markers without breaking them
+    text = text.replace(/\*\*\s+/g, '**');
+    text = text.replace(/\s+\*\*/g, '**');
+    
+    // Clean up heading markers
+    text = text.replace(/^(#{1,3})\s+/gm, '$1 ');
+    
+    // Ensure proper spacing between paragraphs and lists
+    // Add blank line before lists if preceded by text
+    text = text.replace(/([^\n])\n(^[•\d])/gm, '$1\n\n$2');
+    
+    // Add blank line after lists if followed by text
+    text = text.replace(/(^[•\d].+$)\n([^•\d\n])/gm, '$1\n\n$2');
+    
+    // Remove excessive line breaks (more than 2)
+    text = text.replace(/\n{3,}/g, '\n\n');
+    
+    // Trim the text
+    text = text.trim();
     
     return text;
   }

@@ -4,16 +4,16 @@
  */
 
 export const CLEANER_CONFIG = {
-  // Default cleaning options
+  // Default cleaning options - optimized for chat display
   default: {
     removeFileReferences: true,    // Remove 【22:0†file.docx】 patterns
     removeSandboxPaths: true,      // Remove (sandbox:/path) patterns
     removeKnowledgeRefs: true,     // Remove knowledge base references
     removeCitations: false,         // Keep [1], [2] citation markers
-    trimExtraSpaces: false,        // Don't clean up spaces to preserve markdown
-    preserveFormatting: true,      // Preserve paragraph breaks
+    trimExtraSpaces: true,         // Clean up spaces BUT preserve line breaks
+    preserveFormatting: true,      // CRITICAL: Preserve paragraph breaks and markdown
     preserveCodeBlocks: true,      // Keep code blocks intact
-    applyMarkdownFixes: false      // Don't fix markdown to preserve original formatting
+    applyMarkdownFixes: true       // Apply markdown fixes for better display
   },
 
   // Strict cleaning - removes everything

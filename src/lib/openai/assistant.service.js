@@ -183,16 +183,26 @@ class AssistantService {
       .join('\n');
 
     // Clean the response to remove file references and other artifacts
-    // Use configuration based on environment
+    // Use formatForChat for better markdown preservation
     const cleanerConfig = getCleanerConfig();
-    const cleanedText = responseCleaner.process(rawText, cleanerConfig);
+    
+    // First clean artifacts, then format for chat
+    let cleanedText = responseCleaner.clean(rawText, {
+      ...cleanerConfig,
+      preserveFormatting: true,  // Important: preserve line breaks
+      trimExtraSpaces: true
+    });
+    
+    // Apply chat-specific formatting
+    cleanedText = responseCleaner.formatForChat(cleanedText);
 
     // Log cleaning in development for debugging
     if (process.env.NODE_ENV === 'development' && rawText !== cleanedText) {
       console.log('Response cleaned:', {
         original: rawText.substring(0, 200) + '...',
         cleaned: cleanedText.substring(0, 200) + '...',
-        removed: rawText.length - cleanedText.length + ' characters'
+        hasLineBreaks: cleanedText.includes('\n'),
+        lineBreakCount: (cleanedText.match(/\n/g) || []).length
       });
     }
 

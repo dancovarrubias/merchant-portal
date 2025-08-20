@@ -38,28 +38,28 @@ export const EMOJI_LIST = ['😊', '😂', '❤️', '👍', '👏', '🎉', '�
 // Mock responses - This will be replaced with OpenAI integration
 export const MOCK_RESPONSES = {
   default: [
-    '¡Hola! Soy Kike, tu asistente virtual de Kueski Pay. ¿En qué puedo ayudarte hoy?',
-    'Estoy aquí para ayudarte con cualquier pregunta sobre Kueski Pay.',
-    'Puedo ayudarte con pagos, transacciones, configuración de tu cuenta y mucho más.'
+    '¡Hola! 👋 Soy **Kike**, tu asistente virtual de Kueski Pay.\n\n¿En qué puedo ayudarte hoy?',
+    'Estoy aquí para ayudarte con cualquier pregunta sobre **Kueski Pay**.\n\nPuedo asistirte con:\n• Pagos y cobros\n• Transacciones\n• Configuración de cuenta\n• Soporte técnico',
+    '**¡Bienvenido a Kueski Pay!** 🎉\n\nPuedo ayudarte con:\n• Generar códigos de pago\n• Revisar transacciones\n• Administrar usuarios\n• Y mucho más\n\n¿Por dónde empezamos?'
   ],
   payment: [
-    'Para generar un código de pago:\n1. Ve al Dashboard\n2. Haz clic en "Crear orden"\n3. Ingresa el monto\n4. Selecciona "Código de pago"\n5. Comparte el código de 6 dígitos con tu cliente',
-    'Los códigos de pago son válidos por 5 minutos. Si expira, puedes generar uno nuevo fácilmente.',
-    'Puedes ver todos tus códigos generados en el historial de transacciones.'
+    '**Para generar un código de pago:**\n\n1. Ve al **Dashboard**\n2. Haz clic en **"Crear orden"**\n3. Ingresa el **monto** a cobrar\n4. Selecciona **"Código de pago"**\n5. Comparte el código de **6 dígitos** con tu cliente\n\n✅ El código se generará automáticamente y podrás copiarlo con un clic.',
+    '**Información importante sobre códigos de pago:**\n\n• ⏱️ Los códigos son válidos por **5 minutos**\n• 🔄 Si expira, puedes generar uno nuevo fácilmente\n• 📊 Todos los códigos quedan registrados en tu historial\n• 🔒 Cada código es único y seguro\n\n¿Necesitas generar un código ahora?',
+    '**Tipos de cobro disponibles:**\n\n• **Código QR de orden** - Para una transacción específica\n• **Código QR de tienda** - Para múltiples transacciones\n• **Código de 6 dígitos** - Para compartir por mensaje o teléfono\n\nCada método tiene sus ventajas. ¿Cuál prefieres usar?'
   ],
   transactions: [
-    'Para ver tus transacciones:\n1. Ve al Dashboard\n2. Ahí encontrarás todas tus órdenes\n3. Puedes filtrar por estado, fecha o buscar por cliente',
-    'Cada transacción muestra: cliente, monto, método de pago y estado actual.',
-    'Puedes hacer clic en cualquier transacción para ver más detalles.'
+    '**Para ver tus transacciones:**\n\n1. Ve al **Dashboard**\n2. Encontrarás la tabla de **"Órdenes recientes"**\n3. Puedes:\n   • **Filtrar** por estado (Aprobado, Pendiente, etc.)\n   • **Buscar** por nombre de cliente o ID\n   • **Ordenar** por fecha o monto\n\n💡 **Tip:** Haz clic en cualquier transacción para ver todos los detalles.',
+    '**Información de cada transacción:**\n\n• **Cliente** - Nombre y datos de contacto\n• **Monto** - Cantidad cobrada\n• **Método** - QR o código de pago\n• **Estado** - Aprobado, Pendiente o Rechazado\n• **Fecha y hora** - Registro completo\n\n📥 Pronto podrás **exportar** tu historial a Excel.',
+    '**Estados de las transacciones:**\n\n• ✅ **Aprobado** - Pago completado exitosamente\n• ⏳ **Pendiente** - Esperando confirmación\n• ❌ **Rechazado** - Pago no procesado\n• 🚫 **Cancelado** - Transacción cancelada\n• ⏰ **Expirado** - Código de pago vencido\n\nCada estado tiene un color distintivo para identificarlo rápidamente.'
   ],
   help: [
-    'Puedo ayudarte con:\n• Generar códigos de pago\n• Ver transacciones\n• Administrar usuarios\n• Configurar tu cuenta\n• Resolver problemas técnicos\n\n¿Qué necesitas?',
-    'Si necesitas ayuda adicional, puedes contactar a soporte:\n📧 soporte@kueskipay.com\n📞 +52 55 1234 5678\n⏰ Lunes a Viernes, 9:00 - 18:00',
-    'También puedes revisar nuestra sección de Preguntas Frecuentes para respuestas rápidas.'
+    '**¿En qué puedo ayudarte?** 🤝\n\nPuedo asistirte con:\n\n• **Pagos y cobros**\n  - Generar códigos QR\n  - Crear códigos de 6 dígitos\n  - Procesar transacciones\n\n• **Gestión**\n  - Ver historial de transacciones\n  - Administrar usuarios\n  - Configurar tu cuenta\n\n• **Soporte técnico**\n  - Resolver problemas\n  - Guiarte paso a paso\n\n¿Qué necesitas hacer?',
+    '**Contacto de soporte** 📞\n\nSi necesitas ayuda adicional, puedes contactarnos:\n\n📧 **Email:** soporte@kueskipay.com\n📱 **WhatsApp:** +52 55 1234 5678\n☎️ **Teléfono:** +52 55 1234 5678\n\n⏰ **Horario de atención:**\nLunes a Viernes: 9:00 - 18:00\nSábados: 9:00 - 14:00\n\nTambién puedes consultar las **Preguntas Frecuentes** en el menú lateral.',
+    '**Enlaces rápidos** 🔗\n\n• [Dashboard](/dashboard) - Panel principal\n• [Usuarios](/users) - Gestión de usuarios\n• [FAQ](/faq) - Preguntas frecuentes\n• [Contacto](/contact) - Información de contacto\n\n¿Hay algo específico con lo que necesites ayuda?'
   ],
   greeting: [
-    '¡Hola! 👋 Me da gusto verte por aquí. ¿Cómo te puedo ayudar hoy?',
-    '¡Buen día! Soy Kike, tu asistente virtual. ¿Qué necesitas?',
-    '¡Hola! Estoy listo para ayudarte con lo que necesites sobre Kueski Pay.'
+    '¡Hola! 👋 **Me da gusto verte por aquí.**\n\n¿Cómo te puedo ayudar hoy?',
+    '¡Buen día! ☀️ Soy **Kike**, tu asistente virtual.\n\n¿Qué necesitas hacer hoy?',
+    '¡Hola! 🎯 Estoy listo para ayudarte con lo que necesites sobre **Kueski Pay**.\n\n¿Por dónde empezamos?'
   ]
 };

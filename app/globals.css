@@ -35,10 +35,35 @@ code {
   line-height: 1.6;
 }
 
+/* Headings in markdown */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* Paragraph spacing */
+.markdown-content p {
+  margin-bottom: 0.75rem;
+}
+
+.markdown-content p:last-child {
+  margin-bottom: 0;
+}
+
 /* Ensure proper list styling in markdown */
+.markdown-content ul {
+  margin-bottom: 0.75rem;
+}
+
 .markdown-content ul li {
   position: relative;
   padding-left: 0.5rem;
+}
+
+.markdown-content ol {
+  margin-bottom: 0.75rem;
 }
 
 .markdown-content ol li {
@@ -58,12 +83,29 @@ code {
 
 .markdown-content ol li::marker {
   font-weight: 600;
-  color: #4b5563;
+  color: #0075FF;
+}
+
+/* Nested lists */
+.markdown-content li ul,
+.markdown-content li ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
 }
 
 /* Improve list item spacing */
+.markdown-content li {
+  margin-bottom: 0.25rem;
+}
+
+.markdown-content li:last-child {
+  margin-bottom: 0;
+}
+
 .markdown-content li p {
   margin-bottom: 0.25rem;
+  display: inline;
 }
 
 .markdown-content li:last-child p {
@@ -74,6 +116,39 @@ code {
 .markdown-content strong {
   color: #111827;
   font-weight: 600;
+}
+
+/* Emphasis text */
+.markdown-content em {
+  font-style: italic;
+  color: #4b5563;
+}
+
+/* Links in markdown */
+.markdown-content a {
+  color: #0075FF;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.markdown-content a:hover {
+  color: #0056b3;
+}
+
+/* Blockquotes */
+.markdown-content blockquote {
+  border-left: 3px solid #0075FF;
+  padding-left: 1rem;
+  margin: 0.75rem 0;
+  color: #4b5563;
+  font-style: italic;
+}
+
+/* Horizontal rules */
+.markdown-content hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 1rem 0;
 }
 
 /* Code block styling */
