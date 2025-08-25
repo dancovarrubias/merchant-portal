@@ -1,4 +1,4 @@
-import openai, { ASSISTANT_ID } from './config';
+import openai, { ASSISTANT_ID, isOpenAIConfigured } from './config';
 import { RunStatus } from './types';
 import responseCleaner from './response-cleaner';
 import { getCleanerConfig } from './cleaner.config';
@@ -9,7 +9,22 @@ class AssistantService {
     this.assistantId = ASSISTANT_ID;
   }
 
+  checkConfiguration() {
+    if (!isOpenAIConfigured || !this.openai) {
+      return {
+        success: false,
+        error: 'OpenAI is not configured. Please set OPENAI_API_KEY and OPENAI_ASSISTANT_ID environment variables.'
+      };
+    }
+    return { success: true };
+  }
+
   async createThread() {
+    const configCheck = this.checkConfiguration();
+    if (!configCheck.success) {
+      return configCheck;
+    }
+
     try {
       const thread = await this.openai.beta.threads.create();
       return { success: true, data: thread };
@@ -23,6 +38,11 @@ class AssistantService {
   }
 
   async sendMessage(threadId, message) {
+    const configCheck = this.checkConfiguration();
+    if (!configCheck.success) {
+      return configCheck;
+    }
+
     try {
       const threadMessage = await this.openai.beta.threads.messages.create(
         threadId,
@@ -42,6 +62,11 @@ class AssistantService {
   }
 
   async runAssistant(threadId) {
+    const configCheck = this.checkConfiguration();
+    if (!configCheck.success) {
+      return configCheck;
+    }
+
     try {
       console.log('Running assistant with:', { threadId, assistantId: this.assistantId });
       const run = await this.openai.beta.threads.runs.create(threadId, {
@@ -59,6 +84,11 @@ class AssistantService {
   }
 
   async checkRunStatus(threadId, runId) {
+    const configCheck = this.checkConfiguration();
+    if (!configCheck.success) {
+      return configCheck;
+    }
+
     try {
       console.log('Checking run status:', { threadId, runId });
       if (!threadId || !runId) {
@@ -101,6 +131,11 @@ class AssistantService {
   }
 
   async waitForCompletion(threadId, runId, maxAttempts = 30) {
+    const configCheck = this.checkConfiguration();
+    if (!configCheck.success) {
+      return configCheck;
+    }
+
     let attempts = 0;
     
     console.log('Starting waitForCompletion with:', { threadId, runId });
@@ -144,6 +179,11 @@ class AssistantService {
   }
 
   async getMessages(threadId, limit = 20) {
+    const configCheck = this.checkConfiguration();
+    if (!configCheck.success) {
+      return configCheck;
+    }
+
     try {
       const messages = await this.openai.beta.threads.messages.list(threadId, {
         limit,
@@ -160,6 +200,11 @@ class AssistantService {
   }
 
   async deleteThread(threadId) {
+    const configCheck = this.checkConfiguration();
+    if (!configCheck.success) {
+      return configCheck;
+    }
+
     try {
       const result = await this.openai.beta.threads.del(threadId);
       return { success: true, data: result };

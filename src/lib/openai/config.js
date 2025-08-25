@@ -1,17 +1,17 @@
 import { OpenAI } from 'openai';
 
-if (!process.env.OPENAI_API_KEY) {
-  throw new Error('Missing OPENAI_API_KEY environment variable');
+// Solo validar las variables en runtime, no durante el build
+const isConfigured = !!(process.env.OPENAI_API_KEY && process.env.OPENAI_ASSISTANT_ID);
+
+let openai = null;
+
+if (isConfigured) {
+  openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
 }
 
-if (!process.env.OPENAI_ASSISTANT_ID) {
-  throw new Error('Missing OPENAI_ASSISTANT_ID environment variable');
-}
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-export const ASSISTANT_ID = process.env.OPENAI_ASSISTANT_ID;
+export const ASSISTANT_ID = process.env.OPENAI_ASSISTANT_ID || '';
+export const isOpenAIConfigured = isConfigured;
 
 export default openai;
