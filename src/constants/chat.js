@@ -16,18 +16,18 @@ export const CHAT_CONFIG = {
 // Quick Actions
 export const QUICK_ACTIONS = [
   {
-    id: 'payment-code',
-    text: '¿Cómo genero un código de pago?',
+    id: 'why-kueski',
+    text: '¿Por qué ofrecer Kueski Pay?',
     className: 'px-2.5 py-1 text-xs bg-blue-50 text-blue-700 rounded-full hover:bg-blue-100 transition-colors'
   },
   {
-    id: 'transactions',
-    text: 'Ver mis transacciones',
+    id: 'payment-rejected',
+    text: '¿Qué pasa si no acepta el código?',
     className: 'px-2.5 py-1 text-xs bg-blue-50 text-blue-700 rounded-full hover:bg-blue-100 transition-colors'
   },
   {
-    id: 'help',
-    text: 'Necesito ayuda',
+    id: 'pre-approved',
+    text: 'Mi cliente tiene monto PRE-APROBADO',
     className: 'px-2.5 py-1 text-xs bg-blue-50 text-blue-700 rounded-full hover:bg-blue-100 transition-colors'
   }
 ];
