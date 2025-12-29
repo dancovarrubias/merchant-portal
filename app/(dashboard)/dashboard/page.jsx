@@ -13,7 +13,6 @@ import useSemanticSearch from '@/hooks/useSemanticSearch';
 
 export default function DashboardPage() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isCreateOrderModalOpen, setIsCreateOrderModalOpen] = useState(false);
   const [isStoreQRModalOpen, setIsStoreQRModalOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -175,13 +174,8 @@ export default function DashboardPage() {
   return (
     <>
       <PageLayout
-        title="Órdenes"
-        isSidebarOpen={isSidebarOpen}
-        setIsSidebarOpen={setIsSidebarOpen}
-        showActions={true}
-        showQRButton={true}
-        onQRClick={() => setIsStoreQRModalOpen(true)}
-        onPrimaryClick={() => setIsCreateOrderModalOpen(true)}
+        title="Historial"
+        showActions={false}
       >
         
         {/* Orders Section */}

@@ -1,16 +1,12 @@
-'use client';
-import { useState } from 'react';
 import DashboardLayout from '@/components/layout/DashboardLayout';
+import { SidebarProvider } from '@/contexts/SidebarContext';
 
 export default function AppLayout({ children }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   return (
-    <DashboardLayout 
-      isSidebarOpen={isSidebarOpen} 
-      setIsSidebarOpen={setIsSidebarOpen}
-    >
-      {children}
-    </DashboardLayout>
+    <SidebarProvider>
+      <DashboardLayout>
+        {children}
+      </DashboardLayout>
+    </SidebarProvider>
   );
 }

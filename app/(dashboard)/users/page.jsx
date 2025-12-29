@@ -13,7 +13,6 @@ export default function UsersPage() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isUserDetailsOpen, setIsUserDetailsOpen] = useState(false);
   const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
   // Datos de usuarios de ejemplo
   const [usersData, setUsersData] = useState([
@@ -193,8 +192,6 @@ export default function UsersPage() {
     <>
       <PageLayout
         title="Usuarios"
-        isSidebarOpen={isSidebarOpen}
-        setIsSidebarOpen={setIsSidebarOpen}
         showActions={true}
         showQRButton={false}
         primaryActionText="Agregar usuario"

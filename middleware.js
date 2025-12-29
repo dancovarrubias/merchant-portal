@@ -8,7 +8,7 @@ export function middleware(request) {
   const isPublicRoute = publicRoutes.includes(path);
   
   // Rutas del dashboard que requieren autenticación
-  const dashboardRoutes = ['/dashboard', '/users', '/faq', '/contact'];
+  const dashboardRoutes = ['/dashboard', '/cobrar', '/users', '/faq', '/contact'];
   const isDashboardRoute = dashboardRoutes.some(route => path.startsWith(route));
   
   // Verificar sesión (en producción usar JWT o sesión real)

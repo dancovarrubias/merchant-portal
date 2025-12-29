@@ -1,13 +1,13 @@
+'use client';
 import React from 'react';
 import Sidebar from '@/components/layout/Sidebar';
 import Button from '@/components/ui/Button';
+import { useSidebar } from '@/contexts/SidebarContext';
 
-const PageLayout = ({ 
-  children, 
+const PageLayout = ({
+  children,
   title,
-  subtitle, 
-  isSidebarOpen, 
-  setIsSidebarOpen,
+  subtitle,
   showActions = false,
   showQRButton = false,
   qrButtonText = "Ver QR de tienda",
@@ -15,13 +15,16 @@ const PageLayout = ({
   onQRClick,
   onPrimaryClick
 }) => {
+  const { isSidebarOpen, setIsSidebarOpen, isSidebarCollapsed, setIsSidebarCollapsed } = useSidebar();
   return (
     <>
-      <Sidebar 
-        isOpen={isSidebarOpen} 
-        onClose={() => setIsSidebarOpen(false)} 
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+        isCollapsed={isSidebarCollapsed}
+        setIsCollapsed={setIsSidebarCollapsed}
       />
-      
+
       <div className="flex-1 flex flex-col overflow-hidden bg-white">
         {/* Mobile Header */}
         <header className="lg:hidden bg-white border-b border-border-light sticky top-0 z-20">

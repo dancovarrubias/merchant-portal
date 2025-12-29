@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import Modal from '@/components/ui/Modal';
 import ChatMessage from '@/components/assistant/ChatMessage';
