@@ -19,10 +19,10 @@ export function middleware(request) {
     return NextResponse.redirect(new URL('/', request.url));
   }
   
-  // Solo redirigir desde login (/) al dashboard si hay sesión
+  // Solo redirigir desde login (/) a cobrar si hay sesión
   // Permitir acceso a register y forgot-password aunque haya sesión
   if (hasSession && path === '/') {
-    return NextResponse.redirect(new URL('/dashboard', request.url));
+    return NextResponse.redirect(new URL('/cobrar', request.url));
   }
 }
 

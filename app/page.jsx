@@ -26,7 +26,7 @@ export default function LoginPage() {
     e.preventDefault();
     // Simular login - en producción validarías con API
     document.cookie = 'session=mock-token; path=/';
-    router.push('/dashboard');
+    router.push('/cobrar');
   };
 
   return (
